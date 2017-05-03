@@ -4,17 +4,17 @@ public class PageReplacementAlgorithms {
 
 	public static void main(String[] args) throws Exception {
 		Memory physicalMemory = new Memory(10);
-		Memory virtualMemory = new Memory(20);
+		Memory virtualMemory = new Memory(90);
 		
 		for(int i = 0; i < 10; i++) {
 			physicalMemory.add(new MemoryPage());
 		}
 		
-		for(int i = 0; i < 20; i++) {
+		for(int i = 0; i < 90; i++) {
 			virtualMemory.add(new MemoryPage());
 		}
 
-		LinkedList<Integer> requests = ListsFactory.createIntegerList("requests.txt");
+		LinkedList<Integer> requests = ListsFactory.createIntegerList("requests-2.txt");
 		
 		FIFO fifo = new FIFO(PageReplacementAlgorithm.copyMemory(physicalMemory), PageReplacementAlgorithm.copyMemory(virtualMemory));
 		LRU lru = new LRU(PageReplacementAlgorithm.copyMemory(physicalMemory), PageReplacementAlgorithm.copyMemory(virtualMemory));
