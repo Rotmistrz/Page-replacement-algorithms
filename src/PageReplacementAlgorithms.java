@@ -3,18 +3,21 @@ import java.util.LinkedList;
 public class PageReplacementAlgorithms {
 
 	public static void main(String[] args) throws Exception {
-		Memory physicalMemory = new Memory(10);
-		Memory virtualMemory = new Memory(90);
+		int physical = 50;
+		int virtual = 50;
 		
-		for(int i = 0; i < 10; i++) {
+		Memory physicalMemory = new Memory(physical);
+		Memory virtualMemory = new Memory(virtual);
+		
+		for(int i = 0; i < physical; i++) {
 			physicalMemory.add(new MemoryPage());
 		}
 		
-		for(int i = 0; i < 90; i++) {
+		for(int i = 0; i < virtual; i++) {
 			virtualMemory.add(new MemoryPage());
 		}
 
-		LinkedList<Integer> requests = ListsFactory.createIntegerList("requests-2.txt");
+		LinkedList<Integer> requests = ListsFactory.createIntegerList("requests-3.txt");
 		
 		FIFO fifo = new FIFO(PageReplacementAlgorithm.copyMemory(physicalMemory), PageReplacementAlgorithm.copyMemory(virtualMemory));
 		LRU lru = new LRU(PageReplacementAlgorithm.copyMemory(physicalMemory), PageReplacementAlgorithm.copyMemory(virtualMemory));
