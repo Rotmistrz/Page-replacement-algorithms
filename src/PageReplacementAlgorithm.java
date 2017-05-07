@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.ListIterator;
@@ -18,7 +19,13 @@ public abstract class PageReplacementAlgorithm {
 		int current;
 		MemoryPage page;
 		
+		Date currentTime = new Date();
+		
 		while(it.hasNext()) {
+			if(Calendar.getInstance().getTimeInMillis() <= currentTime.getTime()) {
+				continue;
+			}
+			
 			current = it.next();
 			
 			if(!physicalMemory.isInMemory(current)) {
@@ -34,7 +41,7 @@ public abstract class PageReplacementAlgorithm {
 				//System.out.println(current + " in physical memory.");
 			}
 			
-			Date currentTime = new Date();
+			currentTime = new Date();
 			
 			page = physicalMemory.getById(current);
 			page.lastRequestTime = currentTime.getTime();
